@@ -7,7 +7,7 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
 COPY --from=build-env /app/out .
-EXPOSE 80
+EXPOSE 8081
 
 ENV LANG pt_BR.UTF-8
 
