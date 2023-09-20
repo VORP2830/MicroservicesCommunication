@@ -32,22 +32,22 @@ namespace Products_API.Services
         public async Task<ProductDTO> Add(ProductDTO model)
         {
             var product = _mapper.Map<Product>(model);
-            _unitOfWork.Add(product);
+            _unitOfWork.ProductRepository.Add(product);
             _unitOfWork.SaveChangesAsync();
             return model;
         }
         public async Task<ProductDTO> Update(ProductDTO model)
         {
             var product = _mapper.Map<Product>(model);
-            _unitOfWork.Update(product);
+            _unitOfWork.ProductRepository.Update(product);
             _unitOfWork.SaveChangesAsync();
             return model;
         }
         public async Task<ProductDTO> Delete(int id)
         {
-            var product = GetById(id);
+            var product = await _unitOfWork.ProductRepository.GetById(id);
             if(product == null) return null;
-            _unitOfWork.Delete(product);
+            _unitOfWork.ProductRepository.Delete(product);
             _unitOfWork.SaveChangesAsync();
             return _mapper.Map<ProductDTO>(product);
         }

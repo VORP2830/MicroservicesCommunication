@@ -1,4 +1,6 @@
 using Products_API.Context;
+using Products_API.Repositories;
+using Products_API.Repositories.Interfaces;
 using Products_API.Repository.Interface;
 
 namespace Products_API.Repository
@@ -6,22 +8,36 @@ namespace Products_API.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
+        private ProductRepository _productRepository;
+        private CategoryRepository _categoryRepository;
+        private SupplierRepository _supplierRepository;
 
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
         }
-        public void Add<T>(T entity) where T : class
+        public IProductRepository ProductRepository
         {
-            _context.Add(entity);
+            get
+            {
+                return _productRepository = _productRepository ?? new ProductRepository(_context);
+            }
         }
-        public void Delete<T>(T entity) where T : class
+
+        public ICategoryRepository CategoryRepository
         {
-            _context.Remove(entity);
+            get
+            {
+                return _categoryRepository = _categoryRepository ?? new CategoryRepository(_context);
+            }
         }
-        public void Update<T>(T entity) where T : class
+
+        public ISupplierRepository SupplierRepository
         {
-            _context.Update(entity);
+            get
+            {
+                return _supplierRepository = _supplierRepository ?? new SupplierRepository(_context);
+            }
         }
         public async Task<bool> SaveChangesAsync()
         {

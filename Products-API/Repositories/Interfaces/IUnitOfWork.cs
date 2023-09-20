@@ -1,10 +1,12 @@
+using Products_API.Repositories.Interfaces;
+
 namespace Products_API.Repository.Interface
 {
     public interface IUnitOfWork
     {
-        void Add<T>(T entity) where T : class;
-        void Update<T>(T entity) where T : class;
-        void Delete<T>(T entity) where T : class;  
+        IProductRepository ProductRepository { get; }
+        ICategoryRepository CategoryRepository { get; } 
+        ISupplierRepository SupplierRepository { get; }
         Task<bool> SaveChangesAsync();  
     }
 }

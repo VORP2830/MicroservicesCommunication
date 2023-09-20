@@ -5,13 +5,10 @@ using Products_API.Repositories.Interfaces;
 
 namespace Products_API.Repositories
 {
-    public class SupplierRepository : ISupplierRepository
+    public class SupplierRepository : Repository<Supplier>, ISupplierRepository
     {
         private readonly ApplicationDbContext _context;
-        public SupplierRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public SupplierRepository(ApplicationDbContext context) : base(context) { }
         public async Task<Supplier> GetById(int id)
         {
             return await _context.Suppliers.Where(s => s.Id == id).FirstOrDefaultAsync();

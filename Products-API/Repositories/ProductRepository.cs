@@ -5,13 +5,10 @@ using Products_API.Repositories.Interfaces;
 
 namespace Products_API.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : Repository<Product>, IProductRepository
     {
         private readonly ApplicationDbContext _context;
-        public ProductRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public ProductRepository(ApplicationDbContext context) : base(context) { }
         public async Task<Product> GetById(int id)
         {
             return await _context.Products.Where(p => p.Id == id).FirstOrDefaultAsync();
