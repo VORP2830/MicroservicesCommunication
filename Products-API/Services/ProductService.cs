@@ -1,8 +1,8 @@
 using AutoMapper;
 using Products_API.DTOs;
 using Products_API.Entities;
-using Products_API.Repositories;
-using Products_API.Repository;
+using Products_API.Repositories.Interfaces;
+using Products_API.Repository.Interface;
 using Products_API.Services.Interfaces;
 
 namespace Products_API.Services
@@ -10,10 +10,10 @@ namespace Products_API.Services
     public class ProductService : IProductService
     {
         private readonly IMapper _mapper;
-        private readonly UnitOfWork _unitOfWork;
-        private readonly ProductRepository _productRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductRepository _productRepository;
 
-        public ProductService(UnitOfWork unitOfWork, IMapper mapper, ProductRepository productRepository)
+        public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IProductRepository productRepository)
         {
             _unitOfWork = unitOfWork;
             _productRepository = productRepository;

@@ -1,8 +1,8 @@
 using AutoMapper;
 using Products_API.DTOs;
 using Products_API.Entities;
-using Products_API.Repositories;
-using Products_API.Repository;
+using Products_API.Repositories.Interfaces;
+using Products_API.Repository.Interface;
 using Products_API.Services.Interfaces;
 
 namespace Products_API.Services
@@ -10,10 +10,10 @@ namespace Products_API.Services
     public class CategoryService : ICategoryService
     {
         private readonly IMapper _mapper;
-        private readonly UnitOfWork _unitOfWork;
-        private readonly CategoryRepository _categoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryService(UnitOfWork unitOfWork, IMapper mapper, CategoryRepository categoryRepository)
+        public CategoryService(IUnitOfWork unitOfWork, IMapper mapper, ICategoryRepository categoryRepository)
         {
             _unitOfWork = unitOfWork;
             _categoryRepository = categoryRepository;
