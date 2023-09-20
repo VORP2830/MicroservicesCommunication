@@ -1,8 +1,8 @@
 using AutoMapper;
 using Products_API.DTOs;
 using Products_API.Entities;
-using Products_API.Repositories;
-using Products_API.Repository;
+using Products_API.Repositories.Interfaces;
+using Products_API.Repository.Interface;
 using Products_API.Services.Interfaces;
 
 namespace Products_API.Services 
@@ -10,10 +10,10 @@ namespace Products_API.Services
     public class SupplierService : ISupplierService
     {
         private readonly IMapper _mapper;
-        private readonly UnitOfWork _unitOfWork;
-        private readonly SupplierRepository _supplierRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly ISupplierRepository _supplierRepository;
 
-        public SupplierService(UnitOfWork unitOfWork, IMapper mapper, SupplierRepository supplierRepository)
+        public SupplierService(IUnitOfWork unitOfWork, IMapper mapper, ISupplierRepository supplierRepository)
         {
             _unitOfWork = unitOfWork;
             _supplierRepository = supplierRepository;

@@ -2,7 +2,6 @@ using AutoMapper;
 using Products_API.DTOs;
 using Products_API.Entities;
 using Products_API.Repositories;
-using Products_API.Repository;
 using Products_API.Repository.Interface;
 using Products_API.Services.Interfaces;
 
